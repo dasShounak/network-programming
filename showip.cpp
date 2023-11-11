@@ -9,7 +9,7 @@
 
 using namespace std;
 
-int main() {
+int main(int argc, char *argv[]) {
   int status;
   struct addrinfo hints, *res;
 
@@ -17,12 +17,14 @@ int main() {
   hints.ai_family = AF_UNSPEC;
   hints.ai_socktype = SOCK_STREAM;
 
-  status = getaddrinfo("www.xvideos.com", NULL, &hints, &res);
+  status = getaddrinfo(argv[1], NULL, &hints, &res);
 
   if(status !=0) {
     cout << "getaddrinfo error: " << gai_strerror(status) << endl;
     return 1;
   }
+
+  cout << "IP Addresses for " << argv[1] << " are:" << endl;
 
   struct addrinfo *p;
   for (p = res; p != NULL; p=p->ai_next) {
@@ -46,4 +48,6 @@ int main() {
   }
 
   freeaddrinfo(res);
+
+  return 0;
 }
