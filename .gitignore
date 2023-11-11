@@ -1,0 +1,1 @@
+file * | sed -n '/text/d;/exec/s/^\(.*\):.*/\1/p'
